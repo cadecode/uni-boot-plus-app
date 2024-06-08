@@ -1,4 +1,5 @@
 import type { RouteRecordName } from "vue-router";
+import type { UserInfo } from "@/utils/auth";
 
 export type cacheType = {
   mode: string;
@@ -36,11 +37,4 @@ export type setType = {
   hiddenSideBar: boolean;
 };
 
-export type userType = {
-  avatar?: string;
-  username?: string;
-  nickname?: string;
-  roles?: Array<string>;
-  isRemembered?: boolean;
-  loginDay?: number;
-};
+export type userType = UserInfo & {};
