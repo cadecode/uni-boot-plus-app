@@ -70,6 +70,14 @@ declare global {
     VITE_CDN: boolean;
     VITE_HIDE_HOME: string;
     VITE_COMPRESSION: ViteCompression;
+    /**
+     * http 服务端地址
+     */
+    VITE_HTTP_DOMAIN?: string;
+    /**
+     * http base url
+     */
+    VITE_HTTP_BASE_URL?: string;
   }
 
   /**
