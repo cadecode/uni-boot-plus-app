@@ -1,11 +1,14 @@
 {
-  "name": "pure-admin-thin",
-  "version": "5.7.0",
+  "name": "uni-boot-plus-app",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "NODE_OPTIONS=--max-old-space-size=4096 vite",
     "serve": "pnpm dev",
+    "dev": "NODE_OPTIONS=--max-old-space-size=4096 vite",
+    "dev:test": "NODE_OPTIONS=--max-old-space-size=4096 vite --mode test",
+    "dev:staging": "NODE_OPTIONS=--max-old-space-size=4096 vite --mode test",
+    "build:test": "rimraf dist && vite build --mode test",
     "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "build:staging": "rimraf dist && vite build --mode staging",
     "report": "rimraf dist && vite build",
@@ -22,6 +25,8 @@
     "preinstall": "npx only-allow pnpm"
   },
   "keywords": [
+    "uni-boot-plus-app",
+    "uni-boot-plus",
     "pure-admin-thin",
     "vue-pure-admin",
     "element-plus",
@@ -33,19 +38,19 @@
     "vite",
     "esm"
   ],
-  "homepage": "https://github.com/pure-admin/pure-admin-thin",
+  "homepage": "https://github.com/cadecode/uni-boot-plus-app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pure-admin/pure-admin-thin.git"
+    "url": "https://github.com/cadecode/uni-boot-plus-app.git"
   },
   "bugs": {
-    "url": "https://github.com/pure-admin/vue-pure-admin/issues"
+    "url": "https://github.com/cadecode/uni-boot-plus-app/issues"
   },
   "license": "MIT",
   "author": {
-    "name": "xiaoxian521",
-    "email": "pureadmin@163.com",
-    "url": "https://github.com/xiaoxian521"
+    "name": "Cade Li",
+    "email": "cadecode@foxmail.com",
+    "url": "https://github.com/cadecode"
   },
   "dependencies": {
     "@pureadmin/descriptions": "^1.2.1",

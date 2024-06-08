@@ -7,7 +7,13 @@ import boxen, { type Options as BoxenOptions } from "boxen";
 dayjs.extend(duration);
 
 const welcomeMessage = gradientString("cyan", "magenta").multiline(
-  `您好! 欢迎使用 pure-admin 开源项目\n我们为您精心准备了下面两个贴心的保姆级文档\nhttps://pure-admin.github.io/pure-admin-doc\nhttps://pure-admin-utils.netlify.app`
+  `您好! 欢迎使用 uni-boot-plus 项目
+服务端：https://github.com/cadecode/uni-boot-plus
+APP 端：https://github.com/cadecode/uni-boot-plus-app
+
+此 APP 端基于 pure-admin 开源管理系统模板
+pure-admin 文档：https://pure-admin.github.io/pure-admin-doc
+pure-admin-utils 文档：https://pure-admin-utils.netlify.app`
 );
 
 const boxenOptions: BoxenOptions = {
