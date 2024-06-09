@@ -23,6 +23,7 @@ import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { routerArrays } from "@/layout/types";
 import { resetRouter, router } from "@/router";
 import { isFunction } from "@pureadmin/utils";
+import { $t, transformI18n } from "@/plugins/i18n";
 
 const { VITE_HTTP_BASE_URL } = import.meta.env;
 
@@ -141,12 +142,12 @@ class PureHttp implements BasePureHttp {
     }
     PureHttp.IS_CONFIRMING_RE_LOGIN = true;
     return ElMessageBox.confirm(
-      `${res.error.message}, 是否重新登录`,
-      "登录状态失效",
+      `${transformI18n(res.error.message)}, ${transformI18n($t("login.reLoginConfirmContent"))}?`,
+      `${transformI18n($t("login.reLoginConfirmTitle"))}`,
       {
         type: "warning",
-        confirmButtonText: "返回登录页",
-        cancelButtonText: "取消"
+        confirmButtonText: `${transformI18n($t("buttons.pureConfirm"))}`,
+        cancelButtonText: `${transformI18n($t("buttons.pureClose"))}`
       }
     )
       .then(() => {
