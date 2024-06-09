@@ -1,5 +1,6 @@
 import { cdn } from "./cdn";
 import vue from "@vitejs/plugin-vue";
+import { pathResolve } from "./utils";
 import { viteBuildInfo } from "./info";
 import svgLoader from "vite-svg-loader";
 import type { PluginOption } from "vite";
@@ -10,6 +11,7 @@ import removeNoMatch from "vite-plugin-router-warn";
 import { visualizer } from "rollup-plugin-visualizer";
 import removeConsole from "vite-plugin-remove-console";
 import { themePreprocessorPlugin } from "@pureadmin/theme";
+import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import { genScssMultipleScopeVars } from "../src/layout/theme";
 // import { vitePluginFakeServer } from "vite-plugin-fake-server";
 
@@ -22,6 +24,10 @@ export function getPluginsList(
     vue(),
     // jsx、tsx语法支持
     vueJsx(),
+    VueI18nPlugin({
+      jitCompilation: false,
+      include: [pathResolve("../locales/**")]
+    }),
     // 按下Command(⌘)+Shift(⇧)，然后点击页面元素会自动打开本地IDE并跳转到对应的代码位置
     Inspector(),
     viteBuildInfo(),

@@ -1,3 +1,5 @@
+import { $t } from "@/plugins/i18n";
+
 export interface ListItem {
   avatar: string;
   title: string;
@@ -18,20 +20,20 @@ export interface TabItem {
 export const noticesData: TabItem[] = [
   {
     key: "1",
-    name: "通知",
+    name: $t("status.pureNotify"),
     list: [],
-    emptyText: "暂无通知"
+    emptyText: $t("status.pureNoNotify")
   },
   {
     key: "2",
-    name: "消息",
+    name: $t("status.pureMessage"),
     list: [],
-    emptyText: "暂无消息"
+    emptyText: $t("status.pureNoMessage")
   },
   {
     key: "3",
-    name: "待办",
+    name: $t("status.pureTodo"),
     list: [],
-    emptyText: "暂无待办"
+    emptyText: $t("status.pureNoTodo")
   }
 ];
