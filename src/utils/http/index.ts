@@ -10,7 +10,6 @@ import type {
   PureHttpResponse
 } from "./types.d";
 import { stringify } from "qs";
-import NProgress from "../progress";
 import {
   formatToken,
   getToken,
@@ -57,8 +56,6 @@ class PureHttp implements BasePureHttp {
   private httpInterceptorsRequest(): void {
     PureHttp.AXIOS_INSTANCE.interceptors.request.use(
       async (config: PureHttpRequestConfig): Promise<any> => {
-        // 开启进度条动画
-        NProgress.start();
         // 设置请求头 token
         config.headers[multipleTabsKey] = formatToken(getToken());
         // 执行回调
@@ -77,8 +74,6 @@ class PureHttp implements BasePureHttp {
   private httpInterceptorsResponse(): void {
     PureHttp.AXIOS_INSTANCE.interceptors.response.use(
       async (response: PureHttpResponse) => {
-        // 关闭进度条动画
-        NProgress.done();
         try {
           await this.checkResponseError(response);
         } finally {
@@ -90,8 +85,6 @@ class PureHttp implements BasePureHttp {
       },
       async (error: PureHttpError) => {
         error.isCancelRequest = Axios.isCancel(error);
-        // 关闭进度条动画
-        NProgress.done();
         const response = error.response;
         if (response && response.data) {
           try {
