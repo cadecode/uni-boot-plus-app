@@ -1,9 +1,4 @@
-import type {
-  Method,
-  AxiosError,
-  AxiosResponse,
-  AxiosRequestConfig
-} from "axios";
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 /**
  * 统一响应接口
@@ -45,39 +40,23 @@ export interface ErrorMessage {
   moreInfo?: string;
 }
 
-export type RequestMethods = Extract<
-  Method,
-  "get" | "post" | "put" | "delete" | "patch" | "option" | "head"
->;
-
 export interface PureHttpError extends AxiosError {
   isCancelRequest?: boolean;
+  response?: PureHttpResponse;
 }
 
 export interface PureHttpResponse extends AxiosResponse {
   config: PureHttpRequestConfig;
 }
 
-export interface PureHttpRequestConfig extends AxiosRequestConfig {
-  beforeRequestCallback?: (request: PureHttpRequestConfig) => void;
-  beforeResponseCallback?: (response: PureHttpResponse) => void;
+export interface PureHttpRequestConfig<P = any> extends AxiosRequestConfig<P> {
+  beforeRequestCallback?: (request: PureHttpRequestConfig) => any;
+  beforeResponseCallback?: (
+    response: PureHttpResponse,
+    error?: PureHttpError
+  ) => any;
 }
 
-export default class PureHttp {
-  request<T>(
-    method: RequestMethods,
-    url: string,
-    param?: AxiosRequestConfig,
-    axiosConfig?: PureHttpRequestConfig
-  ): Promise<T>;
-  post<T, P>(
-    url: string,
-    params?: P,
-    config?: PureHttpRequestConfig
-  ): Promise<T>;
-  get<T, P>(
-    url: string,
-    params?: P,
-    config?: PureHttpRequestConfig
-  ): Promise<T>;
+export interface BasePureHttp {
+  request<T, P>(config: PureHttpRequestConfig<P>): Promise<T>;
 }

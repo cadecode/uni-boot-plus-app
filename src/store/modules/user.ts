@@ -1,15 +1,7 @@
 import { defineStore } from "pinia";
-import {
-  resetRouter,
-  router,
-  routerArrays,
-  storageLocal,
-  store,
-  type userType
-} from "../utils";
-import { getLogin } from "@/api/user";
-import { useMultiTagsStoreHook } from "./multiTags";
-import { removeToken, setToken, type UserInfo, userKey } from "@/utils/auth";
+import { storageLocal, store, type userType } from "../utils";
+import { setToken, type UserInfo, userKey } from "@/utils/auth";
+import { loginByUsername, logout } from "@/api/auth";
 
 export const useUserStore = defineStore({
   id: "pure-user",
@@ -34,26 +26,15 @@ export const useUserStore = defineStore({
   },
   actions: {
     /** 登入 */
-    async loginByUsername(data) {
-      return new Promise<UserInfo>((resolve, reject) => {
-        getLogin(data)
-          .then(data => {
-            setToken(data);
-            resolve(data);
-          })
-          .catch(error => {
-            reject(error);
-          });
+    async loginByUsername(data: object) {
+      return loginByUsername(data).then(res => {
+        setToken(res.data);
+        return res.data;
       });
     },
-    /** 前端登出 */
-    logOut() {
-      this.username = "";
-      this.roles = [];
-      removeToken();
-      useMultiTagsStoreHook().handleTags("equal", [...routerArrays]);
-      resetRouter();
-      router.push("/login");
+    /** 登出 */
+    logout() {
+      return logout();
     }
   }
 });
