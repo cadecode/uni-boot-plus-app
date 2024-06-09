@@ -3,6 +3,8 @@ import { storageLocal, store, type userType } from "../utils";
 import { setToken, type UserInfo, userKey } from "@/utils/auth";
 import { loginByUsername, logout } from "@/api/auth";
 
+const STORAGE_KEY_REMEMBER_ME = "remember-me";
+
 export const useUserStore = defineStore({
   id: "pure-user",
   state: (): userType => {
@@ -21,10 +23,23 @@ export const useUserStore = defineStore({
       loginDate: userInfo?.loginDate,
       tokenInfo: userInfo?.tokenInfo,
       roles: userInfo?.roles ?? [],
-      permissions: userInfo?.permissions ?? []
+      permissions: userInfo?.permissions ?? [],
+
+      currentPage: 0,
+      rememberMe:
+        storageLocal().getItem<boolean>(STORAGE_KEY_REMEMBER_ME) ?? false
     };
   },
   actions: {
+    /** 存储登录页面显示哪个组件 */
+    SET_CURRENT_PAGE(value: number) {
+      this.currentPage = value;
+    },
+    /** 存储是否勾选了登录页的免登录 */
+    SET_REMEMBER_ME(bool: boolean) {
+      this.rememberMe = bool;
+      storageLocal().setItem(STORAGE_KEY_REMEMBER_ME, bool);
+    },
     /** 登入 */
     async loginByUsername(data: object) {
       return loginByUsername(data).then(res => {

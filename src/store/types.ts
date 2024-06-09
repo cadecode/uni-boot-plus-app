@@ -37,4 +37,10 @@ export type setType = {
   hiddenSideBar: boolean;
 };
 
-export type userType = UserInfo & {};
+export type userType = UserInfo & {
+  /**
+   * 登录页面组件序号
+   */
+  currentPage: number;
+  rememberMe: boolean;
+};
