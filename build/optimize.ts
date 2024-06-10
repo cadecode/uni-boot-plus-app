@@ -11,6 +11,7 @@ const include = [
   "axios",
   "pinia",
   "vue-i18n",
+  "vxe-table",
   "vue-types",
   "js-cookie",
   "vue-tippy",
