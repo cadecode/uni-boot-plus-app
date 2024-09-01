@@ -1,9 +1,10 @@
+// @ts-check
+
 /**
  * 修改配置后重启编辑器
  * 配置项文档：https://prettier.io/docs/en/configuration.html
  * @type {import("prettier").Config}
  */
-
 export default {
   /** 每一行的宽度 */
   printWidth: 120,
